@@ -14,16 +14,244 @@ export type Database = {
   }
   public: {
     Tables: {
-      [_ in never]: never
+      profiles: {
+        Row: {
+          avatar_url: string | null
+          created_at: string
+          email: string | null
+          full_name: string | null
+          id: string
+          phone: string | null
+          updated_at: string
+          ward: string | null
+        }
+        Insert: {
+          avatar_url?: string | null
+          created_at?: string
+          email?: string | null
+          full_name?: string | null
+          id: string
+          phone?: string | null
+          updated_at?: string
+          ward?: string | null
+        }
+        Update: {
+          avatar_url?: string | null
+          created_at?: string
+          email?: string | null
+          full_name?: string | null
+          id?: string
+          phone?: string | null
+          updated_at?: string
+          ward?: string | null
+        }
+        Relationships: []
+      }
+      report_media: {
+        Row: {
+          created_at: string
+          id: string
+          media_type: string
+          mime_type: string | null
+          report_id: string
+          size_bytes: number | null
+          storage_path: string
+          uploaded_by: string
+        }
+        Insert: {
+          created_at?: string
+          id?: string
+          media_type: string
+          mime_type?: string | null
+          report_id: string
+          size_bytes?: number | null
+          storage_path: string
+          uploaded_by: string
+        }
+        Update: {
+          created_at?: string
+          id?: string
+          media_type?: string
+          mime_type?: string | null
+          report_id?: string
+          size_bytes?: number | null
+          storage_path?: string
+          uploaded_by?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "report_media_report_id_fkey"
+            columns: ["report_id"]
+            isOneToOne: false
+            referencedRelation: "reports"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      report_status_history: {
+        Row: {
+          changed_by: string | null
+          created_at: string
+          from_status: Database["public"]["Enums"]["report_status"] | null
+          id: string
+          note: string | null
+          report_id: string
+          to_status: Database["public"]["Enums"]["report_status"]
+        }
+        Insert: {
+          changed_by?: string | null
+          created_at?: string
+          from_status?: Database["public"]["Enums"]["report_status"] | null
+          id?: string
+          note?: string | null
+          report_id: string
+          to_status: Database["public"]["Enums"]["report_status"]
+        }
+        Update: {
+          changed_by?: string | null
+          created_at?: string
+          from_status?: Database["public"]["Enums"]["report_status"] | null
+          id?: string
+          note?: string | null
+          report_id?: string
+          to_status?: Database["public"]["Enums"]["report_status"]
+        }
+        Relationships: [
+          {
+            foreignKeyName: "report_status_history_report_id_fkey"
+            columns: ["report_id"]
+            isOneToOne: false
+            referencedRelation: "reports"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      reports: {
+        Row: {
+          address: string | null
+          ai_analysis: Json | null
+          ai_analyzed_at: string | null
+          assigned_to: string | null
+          category: Database["public"]["Enums"]["report_category"]
+          closed_at: string | null
+          created_at: string
+          department: string | null
+          description: string
+          id: string
+          latitude: number | null
+          location: unknown
+          longitude: number | null
+          priority: Database["public"]["Enums"]["report_priority"] | null
+          reference_code: string
+          reporter_id: string
+          resolved_at: string | null
+          status: Database["public"]["Enums"]["report_status"]
+          title: string
+          updated_at: string
+        }
+        Insert: {
+          address?: string | null
+          ai_analysis?: Json | null
+          ai_analyzed_at?: string | null
+          assigned_to?: string | null
+          category: Database["public"]["Enums"]["report_category"]
+          closed_at?: string | null
+          created_at?: string
+          department?: string | null
+          description: string
+          id?: string
+          latitude?: number | null
+          location?: unknown
+          longitude?: number | null
+          priority?: Database["public"]["Enums"]["report_priority"] | null
+          reference_code?: string
+          reporter_id: string
+          resolved_at?: string | null
+          status?: Database["public"]["Enums"]["report_status"]
+          title: string
+          updated_at?: string
+        }
+        Update: {
+          address?: string | null
+          ai_analysis?: Json | null
+          ai_analyzed_at?: string | null
+          assigned_to?: string | null
+          category?: Database["public"]["Enums"]["report_category"]
+          closed_at?: string | null
+          created_at?: string
+          department?: string | null
+          description?: string
+          id?: string
+          latitude?: number | null
+          location?: unknown
+          longitude?: number | null
+          priority?: Database["public"]["Enums"]["report_priority"] | null
+          reference_code?: string
+          reporter_id?: string
+          resolved_at?: string | null
+          status?: Database["public"]["Enums"]["report_status"]
+          title?: string
+          updated_at?: string
+        }
+        Relationships: []
+      }
+      user_roles: {
+        Row: {
+          created_at: string
+          id: string
+          role: Database["public"]["Enums"]["app_role"]
+          user_id: string
+        }
+        Insert: {
+          created_at?: string
+          id?: string
+          role: Database["public"]["Enums"]["app_role"]
+          user_id: string
+        }
+        Update: {
+          created_at?: string
+          id?: string
+          role?: Database["public"]["Enums"]["app_role"]
+          user_id?: string
+        }
+        Relationships: []
+      }
     }
     Views: {
       [_ in never]: never
     }
     Functions: {
-      [_ in never]: never
+      ensure_profile: { Args: never; Returns: undefined }
+      has_role: {
+        Args: {
+          _role: Database["public"]["Enums"]["app_role"]
+          _user_id: string
+        }
+        Returns: boolean
+      }
+      is_staff: { Args: { _user_id: string }; Returns: boolean }
     }
     Enums: {
-      [_ in never]: never
+      app_role: "citizen" | "field_worker" | "authority" | "admin"
+      report_category:
+        | "pothole"
+        | "garbage"
+        | "streetlight"
+        | "damaged_road"
+        | "drainage"
+        | "water_leakage"
+        | "infrastructure"
+        | "other"
+      report_priority: "low" | "medium" | "high" | "critical"
+      report_status:
+        | "submitted"
+        | "ai_analysis"
+        | "verified"
+        | "assigned"
+        | "in_progress"
+        | "resolved"
+        | "citizen_verification"
+        | "closed"
     }
     CompositeTypes: {
       [_ in never]: never
@@ -150,6 +378,29 @@ export type CompositeTypes<
 
 export const Constants = {
   public: {
-    Enums: {},
+    Enums: {
+      app_role: ["citizen", "field_worker", "authority", "admin"],
+      report_category: [
+        "pothole",
+        "garbage",
+        "streetlight",
+        "damaged_road",
+        "drainage",
+        "water_leakage",
+        "infrastructure",
+        "other",
+      ],
+      report_priority: ["low", "medium", "high", "critical"],
+      report_status: [
+        "submitted",
+        "ai_analysis",
+        "verified",
+        "assigned",
+        "in_progress",
+        "resolved",
+        "citizen_verification",
+        "closed",
+      ],
+    },
   },
 } as const
