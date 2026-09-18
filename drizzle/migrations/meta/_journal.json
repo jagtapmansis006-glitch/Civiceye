@@ -1,5 +1,27 @@
 {
   "version": "7",
   "dialect": "postgresql",
-  "entries": []
+  "entries": [
+    {
+      "idx": 0,
+      "version": "7",
+      "when": 1789710409705,
+      "tag": "0000_civiceye_core_schema",
+      "breakpoints": true
+    },
+    {
+      "idx": 1,
+      "version": "7",
+      "when": 1789710442994,
+      "tag": "0001_report_media_storage_policies",
+      "breakpoints": true
+    },
+    {
+      "idx": 2,
+      "version": "7",
+      "when": 1789710497181,
+      "tag": "0002_profiles_email_column",
+      "breakpoints": true
+    }
+  ]
 }
