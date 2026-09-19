@@ -11,7 +11,7 @@ import { useEffect, type ReactNode } from "react";
 
 import appCss from "../styles.css?url";
 import { reportLovableError } from "../lib/lovable-error-reporting";
-import { AuthProvider } from "@/hooks/useAuth";
+import { AuthProvider } from "@/components/auth/AuthProvider";
 import { authService } from "@/services/auth.service";
 import { BackgroundField } from "@/components/layout/BackgroundField";
 import { Toaster } from "@/components/ui/sonner";
