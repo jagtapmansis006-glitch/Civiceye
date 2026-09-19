@@ -29,7 +29,7 @@ function AuthCallbackPage() {
       navigate({ to, replace: true });
     };
 
-    const { data: subscription } = authService.onAuthStateChange((event, session) => {
+    const { data: subscription } = authService.onAuthStateChange(async (event, session) => {
       if ((event === "SIGNED_IN" || event === "INITIAL_SESSION") && session) {
         finish("/dashboard");
       }
