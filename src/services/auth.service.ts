@@ -10,7 +10,7 @@ export const authService = {
       email: input.email,
       password: input.password,
       options: {
-        emailRedirectTo: window.location.origin,
+        emailRedirectTo: `${window.location.origin}/auth/callback`,
         data: { full_name: input.fullName },
       },
     });
