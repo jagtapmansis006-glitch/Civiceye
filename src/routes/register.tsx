@@ -7,6 +7,7 @@ import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { useAuth } from "@/hooks/useAuth";
 import { authService } from "@/services/auth.service";
+import { profileService } from "@/services/profile.service";
 
 export const Route = createFileRoute("/register")({
   head: () => ({
@@ -40,10 +41,18 @@ function RegisterPage() {
     setError(null);
     try {
       const data = await authService.signUpWithEmail({ email, password, fullName });
-      if (data.session) navigate({ to: "/dashboard" });
-      else setCheckEmail(true);
+      if (data.session) {
+        // Session issued immediately (email confirmation off): persist the
+        // profile row in the database right away. Any failure is shown verbatim.
+        await profileService.ensureProfile();
+        navigate({ to: "/dashboard" });
+      } else {
+        // Email confirmation on: profile is written on first sign-in after
+        // the user clicks the confirmation link (AuthProvider ensures it).
+        setCheckEmail(true);
+      }
     } catch (err) {
-      setError(err instanceof Error ? err.message : "Could not create your account.");
+      setError(err instanceof Error ? err.message : String(err));
     } finally {
       setBusy(false);
     }
