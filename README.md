@@ -45,13 +45,14 @@ State & Data Fetching: TanStack Query / React Hooks
 
 Prepared AI Pipeline: Claude API (for natural language triage) & YOLOv11 (for automated image severity detection) via Supabase Edge Functions.
 
-📁 Repository Architecture
+📁** Repository Architecture**
 
+```text
 CivicEye/
 ├── public/                 # Static assets & public resources
 ├── src/
 │   ├── assets/             # Brand logos, icons, and media
-│   ├── components/         # Reusable UI components (Buttons, Inputs, Cards, Modals)
+│   ├── components/         # Reusable UI components
 │   │   ├── common/         # Layouts, Navigation, Badges
 │   │   └── reports/        # Issue-specific components & status timeline
 │   ├── hooks/              # Custom React hooks (useAuth, useReports, useGeoLocation)
@@ -79,7 +80,6 @@ CivicEye/
 ├── .env.example            # Environment variables placeholder schema
 ├── package.json            # Project dependencies & build scripts
 └── vite.config.ts          # Vite configuration
-
 
 🚀 Getting Started
 
