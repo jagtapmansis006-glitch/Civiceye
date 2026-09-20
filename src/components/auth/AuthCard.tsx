@@ -1,7 +1,17 @@
 import type { ReactNode } from "react";
 import { Brand } from "@/components/layout/Brand";
 
-export function AuthCard({ title, description, children, footer }: { title: string; description: string; children: ReactNode; footer?: ReactNode }) {
+export function AuthCard({
+  title,
+  description,
+  children,
+  footer,
+}: {
+  title: string;
+  description: string;
+  children: ReactNode;
+  footer?: ReactNode;
+}) {
   return (
     <div className="relative z-10 flex min-h-screen flex-col items-center justify-center px-4 py-12">
       <Brand className="mb-8" />

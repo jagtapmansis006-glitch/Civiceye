@@ -36,8 +36,8 @@ function LandingPage() {
               Report a civic issue. Watch it close the loop.
             </h1>
             <p className="mt-5 max-w-[48ch] text-base text-pretty text-ink/70 md:text-lg">
-              File a pothole, a blocked drain, or a broken streetlight. CivicEye tracks every report from first photo
-              to field verification, so you always know where things stand.
+              File a pothole, a blocked drain, or a broken streetlight. CivicEye tracks every report
+              from first photo to field verification, so you always know where things stand.
             </p>
             <div className="mt-7 flex flex-wrap items-center gap-3">
               <Button asChild size="lg">
@@ -68,12 +68,20 @@ function LandingPage() {
               <div className="flex flex-wrap items-center justify-between gap-3">
                 <div>
                   <p className="eyebrow">How a report moves</p>
-                  <p className="font-serif text-xl font-semibold text-civic-deep">Eight accountable stages</p>
+                  <p className="font-serif text-xl font-semibold text-civic-deep">
+                    Eight accountable stages
+                  </p>
                 </div>
                 <div className="flex flex-wrap gap-2 text-xs font-semibold">
-                  <span className="rounded-full bg-civic/5 px-2.5 py-1 text-civic ring-1 ring-civic/15">Reviewed</span>
-                  <span className="rounded-full bg-signal/10 px-2.5 py-1 text-signal ring-1 ring-signal/25">Worked on</span>
-                  <span className="rounded-full bg-verd/10 px-2.5 py-1 text-verd ring-1 ring-verd/25">Confirmed by you</span>
+                  <span className="rounded-full bg-civic/5 px-2.5 py-1 text-civic ring-1 ring-civic/15">
+                    Reviewed
+                  </span>
+                  <span className="rounded-full bg-signal/10 px-2.5 py-1 text-signal ring-1 ring-signal/25">
+                    Worked on
+                  </span>
+                  <span className="rounded-full bg-verd/10 px-2.5 py-1 text-verd ring-1 ring-verd/25">
+                    Confirmed by you
+                  </span>
                 </div>
               </div>
 
@@ -95,20 +103,43 @@ function LandingPage() {
 
         <section id="how-it-works" className="scroll-mt-20 py-10">
           <div className="mx-auto max-w-[40ch] text-center">
-            <h2 className="font-serif text-2xl font-semibold text-balance text-civic-deep">How it works</h2>
-            <p className="mt-2 text-sm text-pretty text-ink/60">A clear, accountable path from your photo to a fixed street.</p>
+            <h2 className="font-serif text-2xl font-semibold text-balance text-civic-deep">
+              How it works
+            </h2>
+            <p className="mt-2 text-sm text-pretty text-ink/60">
+              A clear, accountable path from your photo to a fixed street.
+            </p>
           </div>
           <div className="mt-8 grid gap-4 md:grid-cols-3">
-            <Step n="1" tone="civic" title="File it" body="Pick a category, add a note, attach a photo, and drop a location pin." />
-            <Step n="2" tone="signal" title="It's checked" body="Authorities verify the report and route it to the right field team." />
-            <Step n="3" tone="verd" title="You confirm" body="Once crews mark it resolved, you verify the fix and the record closes." />
+            <Step
+              n="1"
+              tone="civic"
+              title="File it"
+              body="Pick a category, add a note, attach a photo, and drop a location pin."
+            />
+            <Step
+              n="2"
+              tone="signal"
+              title="It's checked"
+              body="Authorities verify the report and route it to the right field team."
+            />
+            <Step
+              n="3"
+              tone="verd"
+              title="You confirm"
+              body="Once crews mark it resolved, you verify the fix and the record closes."
+            />
           </div>
         </section>
 
         <section id="issue-types" className="scroll-mt-20 py-10">
           <div className="max-w-[40ch]">
-            <h2 className="font-serif text-2xl font-semibold text-balance text-civic-deep">What you can report</h2>
-            <p className="mt-2 text-sm text-pretty text-ink/60">Every category maps to a department responsible for the fix.</p>
+            <h2 className="font-serif text-2xl font-semibold text-balance text-civic-deep">
+              What you can report
+            </h2>
+            <p className="mt-2 text-sm text-pretty text-ink/60">
+              Every category maps to a department responsible for the fix.
+            </p>
           </div>
           <div className="mt-6 grid grid-cols-2 gap-3 sm:grid-cols-4">
             {REPORT_CATEGORIES.map((c) => (
@@ -128,10 +159,13 @@ function LandingPage() {
           <div className="rounded-2xl bg-civic/5 p-6 ring-1 ring-black/5 backdrop-blur-md md:p-8">
             <div className="grid items-center gap-6 md:grid-cols-[1fr_auto]">
               <div className="max-w-[52ch]">
-                <h2 className="font-serif text-2xl font-semibold text-balance text-civic-deep">A public service, in the open.</h2>
+                <h2 className="font-serif text-2xl font-semibold text-balance text-civic-deep">
+                  A public service, in the open.
+                </h2>
                 <p className="mt-2 text-sm text-pretty text-ink/65">
-                  CivicEye is operated by the municipal works division. Every report is a public record, response
-                  times are published, and none of your data is sold or shared for advertising.
+                  CivicEye is operated by the municipal works division. Every report is a public
+                  record, response times are published, and none of your data is sold or shared for
+                  advertising.
                 </p>
               </div>
               <Button asChild>
@@ -146,7 +180,17 @@ function LandingPage() {
   );
 }
 
-function Step({ n, tone, title, body }: { n: string; tone: "civic" | "signal" | "verd"; title: string; body: string }) {
+function Step({
+  n,
+  tone,
+  title,
+  body,
+}: {
+  n: string;
+  tone: "civic" | "signal" | "verd";
+  title: string;
+  body: string;
+}) {
   const toneClass =
     tone === "civic"
       ? "bg-civic/8 text-civic ring-civic/15"
@@ -155,7 +199,11 @@ function Step({ n, tone, title, body }: { n: string; tone: "civic" | "signal" | 
         : "bg-verd/10 text-verd ring-verd/20";
   return (
     <div className="glass-panel p-5">
-      <span className={`inline-flex size-8 items-center justify-center rounded-lg font-serif font-semibold ring-1 ${toneClass}`}>{n}</span>
+      <span
+        className={`inline-flex size-8 items-center justify-center rounded-lg font-serif font-semibold ring-1 ${toneClass}`}
+      >
+        {n}
+      </span>
       <p className="mt-4 font-serif text-lg font-semibold text-ink">{title}</p>
       <p className="mt-1.5 text-sm text-pretty text-ink/60">{body}</p>
     </div>

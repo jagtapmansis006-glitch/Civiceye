@@ -18,11 +18,13 @@ export function useRoleMutations() {
     queryClient.invalidateQueries({ queryKey: queryKeys.staffDirectory() });
   };
   const grant = useMutation({
-    mutationFn: ({ userId, role }: { userId: string; role: AppRole }) => adminService.grantRole(userId, role),
+    mutationFn: ({ userId, role }: { userId: string; role: AppRole }) =>
+      adminService.grantRole(userId, role),
     onSuccess: invalidate,
   });
   const revoke = useMutation({
-    mutationFn: ({ userId, role }: { userId: string; role: AppRole }) => adminService.revokeRole(userId, role),
+    mutationFn: ({ userId, role }: { userId: string; role: AppRole }) =>
+      adminService.revokeRole(userId, role),
     onSuccess: invalidate,
   });
   return { grant, revoke };

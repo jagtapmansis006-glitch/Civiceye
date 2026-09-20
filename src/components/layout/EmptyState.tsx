@@ -20,7 +20,11 @@ export function EmptyState({
 
 export function LoadingState({ label = "Loading…" }: { label?: string }) {
   return (
-    <div className="glass-panel px-6 py-14 text-center text-sm text-ink/55" role="status" aria-live="polite">
+    <div
+      className="glass-panel px-6 py-14 text-center text-sm text-ink/55"
+      role="status"
+      aria-live="polite"
+    >
       {label}
     </div>
   );
@@ -29,7 +33,10 @@ export function LoadingState({ label = "Loading…" }: { label?: string }) {
 export function ErrorState({ error }: { error: unknown }) {
   const message = error instanceof Error ? error.message : "Something went wrong.";
   return (
-    <div className="rounded-xl bg-alert-soft px-5 py-4 text-sm text-alert ring-1 ring-alert/20" role="alert">
+    <div
+      className="rounded-xl bg-alert-soft px-5 py-4 text-sm text-alert ring-1 ring-alert/20"
+      role="alert"
+    >
       {message}
     </div>
   );

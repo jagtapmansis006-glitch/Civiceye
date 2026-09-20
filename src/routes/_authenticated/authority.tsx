@@ -5,7 +5,13 @@ import { RoleGate } from "@/components/layout/RoleGate";
 import { EmptyState, ErrorState, LoadingState } from "@/components/layout/EmptyState";
 import { StatCard } from "@/components/dashboard/StatCard";
 import { ReportList } from "@/components/reports/ReportList";
-import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
+import {
+  Select,
+  SelectContent,
+  SelectItem,
+  SelectTrigger,
+  SelectValue,
+} from "@/components/ui/select";
 import { useAllReports, useReportsRealtime } from "@/hooks/useReports";
 import { REPORT_CATEGORIES } from "@/lib/report-categories";
 import { REPORT_STATUS, REPORT_STATUS_ORDER } from "@/lib/report-status";
@@ -33,7 +39,9 @@ function AuthorityDashboard() {
   const overview = useAllReports({});
   const all = overview.data ?? [];
 
-  const needsVerification = all.filter((r) => r.status === "submitted" || r.status === "ai_analysis").length;
+  const needsVerification = all.filter(
+    (r) => r.status === "submitted" || r.status === "ai_analysis",
+  ).length;
   const unassigned = all.filter((r) => r.status === "verified").length;
   const active = all.filter((r) => r.status === "assigned" || r.status === "in_progress").length;
   const awaitingHandoff = all.filter((r) => r.status === "resolved").length;
@@ -86,7 +94,10 @@ function AuthorityDashboard() {
       {reports.isPending && <LoadingState />}
       {reports.isError && <ErrorState error={reports.error} />}
       {reports.isSuccess && reports.data.length === 0 && (
-        <EmptyState title="No reports match" description="Try widening the status or category filter." />
+        <EmptyState
+          title="No reports match"
+          description="Try widening the status or category filter."
+        />
       )}
       {reports.isSuccess && reports.data.length > 0 && <ReportList reports={reports.data} />}
     </div>

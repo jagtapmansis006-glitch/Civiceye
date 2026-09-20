@@ -64,7 +64,10 @@ export const reportsService = {
 
   /** Every report visible to the caller — authority/admin see all via RLS. */
   async listAll(filters: ReportFilters = {}): Promise<Report[]> {
-    let query = supabase.from("reports").select(REPORT_COLUMNS).order("created_at", { ascending: false });
+    let query = supabase
+      .from("reports")
+      .select(REPORT_COLUMNS)
+      .order("created_at", { ascending: false });
     if (filters.status === "open") query = query.neq("status", "closed");
     else if (filters.status) query = query.eq("status", filters.status);
     if (filters.category) query = query.eq("category", filters.category);
@@ -74,7 +77,11 @@ export const reportsService = {
   },
 
   async getById(id: string): Promise<Report | null> {
-    const { data, error } = await supabase.from("reports").select(REPORT_COLUMNS).eq("id", id).maybeSingle();
+    const { data, error } = await supabase
+      .from("reports")
+      .select(REPORT_COLUMNS)
+      .eq("id", id)
+      .maybeSingle();
     if (error) throw error;
     return data as Report | null;
   },
@@ -101,7 +108,10 @@ export const reportsService = {
   },
 
   /** Authority action: assign a field worker (and optionally set priority). */
-  async assign(id: string, input: { assignedTo: string; priority?: ReportPriority | null; department?: string | null }): Promise<Report> {
+  async assign(
+    id: string,
+    input: { assignedTo: string; priority?: ReportPriority | null; department?: string | null },
+  ): Promise<Report> {
     const patch: ReportUpdate = { assigned_to: input.assignedTo, status: "assigned" };
     if (input.priority !== undefined) patch.priority = input.priority;
     if (input.department !== undefined) patch.department = input.department;

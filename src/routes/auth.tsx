@@ -1,7 +1,8 @@
-import { createFileRoute, redirect } from "@tanstack/react-router";
+import { createFileRoute, Outlet, useRouterState } from "@tanstack/react-router";
+import { AuthCallback } from "@/components/auth/AuthCallback";
 
-/** The protected-area gate redirects here; forward to the login page. */
 export const Route = createFileRoute("/auth")({
+<<<<<<< Updated upstream
   beforeLoad: ({ location }) => {
     // Only forward the bare /auth path — child routes such as
     // /auth/callback must stay reachable for email confirmation links.
@@ -9,4 +10,15 @@ export const Route = createFileRoute("/auth")({
       throw redirect({ to: "/login" });
     }
   },
+=======
+  component: AuthRouteComponent,
+>>>>>>> Stashed changes
 });
+
+function AuthRouteComponent() {
+  const pathname = useRouterState({ select: (s) => s.location.pathname });
+  if (pathname === "/auth" || pathname === "/auth/") {
+    return <AuthCallback />;
+  }
+  return <Outlet />;
+}

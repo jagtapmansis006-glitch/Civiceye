@@ -42,7 +42,15 @@ function ResetPasswordPage() {
       <form onSubmit={handleSubmit} className="space-y-4">
         <div className="space-y-1.5">
           <Label htmlFor="password">New password</Label>
-          <Input id="password" type="password" autoComplete="new-password" minLength={8} required value={password} onChange={(e) => setPassword(e.target.value)} />
+          <Input
+            id="password"
+            type="password"
+            autoComplete="new-password"
+            minLength={8}
+            required
+            value={password}
+            onChange={(e) => setPassword(e.target.value)}
+          />
         </div>
         <Button type="submit" className="w-full" disabled={busy}>
           {busy ? "Saving…" : "Update password"}

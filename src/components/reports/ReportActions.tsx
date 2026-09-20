@@ -2,7 +2,13 @@ import { useState } from "react";
 import { toast } from "sonner";
 import { Button } from "@/components/ui/button";
 import { Label } from "@/components/ui/label";
-import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
+import {
+  Select,
+  SelectContent,
+  SelectItem,
+  SelectTrigger,
+  SelectValue,
+} from "@/components/ui/select";
 import { useAuth } from "@/hooks/useAuth";
 import { useAssignReport, useFieldWorkers, useUpdateReportStatus } from "@/hooks/useReports";
 import { REPORT_STATUS } from "@/lib/report-status";
@@ -35,11 +41,18 @@ export function ReportActions({ report }: { report: Report }) {
   return (
     <div className="space-y-5">
       {isReporter && report.status === "citizen_verification" && (
-        <ActionGroup title="Confirm the fix" hint="The field team marked this resolved. Does it look right to you?">
+        <ActionGroup
+          title="Confirm the fix"
+          hint="The field team marked this resolved. Does it look right to you?"
+        >
           <Button onClick={() => setStatus("closed", "Thanks — report closed")} disabled={busy}>
             Yes, it's fixed
           </Button>
-          <Button variant="soft" onClick={() => setStatus("in_progress", "Sent back to the field team")} disabled={busy}>
+          <Button
+            variant="soft"
+            onClick={() => setStatus("in_progress", "Sent back to the field team")}
+            disabled={busy}
+          >
             Not fixed yet
           </Button>
         </ActionGroup>
@@ -100,11 +113,18 @@ function AuthorityActions({
   return (
     <>
       {canVerify && (
-        <ActionGroup title="Verification" hint="Confirm the issue is genuine before assigning a crew.">
+        <ActionGroup
+          title="Verification"
+          hint="Confirm the issue is genuine before assigning a crew."
+        >
           <Button onClick={() => setStatus("verified", "Report verified")} disabled={busy}>
             Mark verified
           </Button>
-          <Button variant="soft" onClick={() => setStatus("closed", "Report closed")} disabled={busy}>
+          <Button
+            variant="soft"
+            onClick={() => setStatus("closed", "Report closed")}
+            disabled={busy}
+          >
             Reject & close
           </Button>
         </ActionGroup>
@@ -112,7 +132,10 @@ function AuthorityActions({
 
       {report.status === "resolved" && (
         <ActionGroup title="Hand to citizen" hint="Ask the reporter to confirm the fix.">
-          <Button onClick={() => setStatus("citizen_verification", "Sent for citizen verification")} disabled={busy}>
+          <Button
+            onClick={() => setStatus("citizen_verification", "Sent for citizen verification")}
+            disabled={busy}
+          >
             Request citizen verification
           </Button>
         </ActionGroup>
@@ -124,11 +147,15 @@ function AuthorityActions({
             <Label>Field worker</Label>
             <Select value={workerId} onValueChange={setWorkerId}>
               <SelectTrigger aria-label="Field worker">
-                <SelectValue placeholder={workers.isPending ? "Loading…" : "Choose a field worker"} />
+                <SelectValue
+                  placeholder={workers.isPending ? "Loading…" : "Choose a field worker"}
+                />
               </SelectTrigger>
               <SelectContent>
                 {workers.data?.length === 0 && (
-                  <div className="px-3 py-2 text-sm text-ink/55">No field workers yet — grant the role in Administration.</div>
+                  <div className="px-3 py-2 text-sm text-ink/55">
+                    No field workers yet — grant the role in Administration.
+                  </div>
                 )}
                 {workers.data?.map((w) => (
                   <SelectItem key={w.id} value={w.id}>
@@ -170,7 +197,15 @@ function AuthorityActions({
   );
 }
 
-function ActionGroup({ title, hint, children }: { title: string; hint: string; children: React.ReactNode }) {
+function ActionGroup({
+  title,
+  hint,
+  children,
+}: {
+  title: string;
+  hint: string;
+  children: React.ReactNode;
+}) {
   return (
     <div className="rounded-xl bg-civic/[0.04] p-4 ring-1 ring-black/5">
       <p className="text-sm font-semibold text-ink">{title}</p>

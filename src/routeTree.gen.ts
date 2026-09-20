@@ -20,7 +20,11 @@ import { Route as AuthenticatedAuthorityRouteImport } from './routes/_authentica
 import { Route as AuthenticatedDashboardRouteImport } from './routes/_authenticated/dashboard'
 import { Route as AuthenticatedFieldRouteImport } from './routes/_authenticated/field'
 import { Route as AuthenticatedSettingsRouteImport } from './routes/_authenticated/settings'
+<<<<<<< Updated upstream
 import { Route as AuthCallbackRouteImport } from './routes/auth/callback'
+=======
+import { Route as AuthCallbackRouteImport } from './routes/auth.callback'
+>>>>>>> Stashed changes
 import { Route as AuthenticatedReportsIndexRouteImport } from './routes/_authenticated/reports/index'
 import { Route as AuthenticatedReportsIdRouteImport } from './routes/_authenticated/reports/$id'
 import { Route as AuthenticatedReportsNewRouteImport } from './routes/_authenticated/reports/new'

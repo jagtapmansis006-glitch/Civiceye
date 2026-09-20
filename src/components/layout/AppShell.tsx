@@ -51,14 +51,20 @@ export function AppShell({ children }: { children: ReactNode }) {
         <div className="flex h-16 items-center px-5">
           <Brand />
         </div>
-        <nav className="flex gap-1 overflow-x-auto px-3 pb-3 md:flex-1 md:flex-col md:overflow-visible md:pb-0" aria-label="Main">
+        <nav
+          className="flex gap-1 overflow-x-auto px-3 pb-3 md:flex-1 md:flex-col md:overflow-visible md:pb-0"
+          aria-label="Main"
+        >
           {items.map((item) => (
             <Link
               key={item.to}
               to={item.to}
               activeOptions={{ exact: item.to === "/reports" }}
               className="flex shrink-0 items-center gap-2.5 rounded-lg px-3 py-2 text-sm font-medium text-ink/70 transition-colors hover:bg-accent hover:text-civic"
-              activeProps={{ className: "bg-civic text-primary-foreground hover:bg-civic hover:text-primary-foreground" }}
+              activeProps={{
+                className:
+                  "bg-civic text-primary-foreground hover:bg-civic hover:text-primary-foreground",
+              }}
             >
               <item.icon className="size-4" aria-hidden />
               {item.label}
@@ -70,7 +76,12 @@ export function AppShell({ children }: { children: ReactNode }) {
           <p className="mt-0.5 text-xs text-ink/55">
             {roles.length ? roles.map((r) => ROLE_LABEL[r]).join(" · ") : "Citizen"}
           </p>
-          <Button variant="ghost" size="sm" className="mt-3 w-full justify-start px-2" onClick={handleSignOut}>
+          <Button
+            variant="ghost"
+            size="sm"
+            className="mt-3 w-full justify-start px-2"
+            onClick={handleSignOut}
+          >
             <LogOut /> Sign out
           </Button>
         </div>

@@ -39,7 +39,10 @@ function FieldDashboard() {
       {reports.isPending && <LoadingState />}
       {reports.isError && <ErrorState error={reports.error} />}
       {reports.isSuccess && all.length === 0 && (
-        <EmptyState title="No assignments yet" description="Reports assigned to you by the authority desk will show up here." />
+        <EmptyState
+          title="No assignments yet"
+          description="Reports assigned to you by the authority desk will show up here."
+        />
       )}
       {reports.isSuccess && all.length > 0 && (
         <>

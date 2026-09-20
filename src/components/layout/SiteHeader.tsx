@@ -25,7 +25,10 @@ export function SiteHeader() {
         </div>
         <div className="flex items-center gap-3">
           {!loading && !user && (
-            <Link to="/login" className="hidden text-sm font-medium text-civic transition-colors hover:text-civic-deep sm:inline-flex">
+            <Link
+              to="/login"
+              className="hidden text-sm font-medium text-civic transition-colors hover:text-civic-deep sm:inline-flex"
+            >
               Log in
             </Link>
           )}

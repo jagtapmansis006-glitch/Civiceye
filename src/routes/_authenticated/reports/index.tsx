@@ -35,7 +35,11 @@ function MyReportsPage() {
           </Button>
         }
       />
-      <div role="tablist" aria-label="Filter reports" className="inline-flex gap-1 rounded-lg bg-glass p-1 ring-1 ring-black/5">
+      <div
+        role="tablist"
+        aria-label="Filter reports"
+        className="inline-flex gap-1 rounded-lg bg-glass p-1 ring-1 ring-black/5"
+      >
         {(["all", "open", "closed"] as Filter[]).map((f) => (
           <button
             key={f}

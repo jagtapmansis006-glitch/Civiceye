@@ -24,7 +24,12 @@ export function StatusPipeline({ current }: { current?: ReportStatus }) {
             >
               {idx + 1}
             </span>
-            <span className={cn("text-sm", active ? "font-semibold text-ink" : done ? "text-ink/70" : "text-ink/45")}>
+            <span
+              className={cn(
+                "text-sm",
+                active ? "font-semibold text-ink" : done ? "text-ink/70" : "text-ink/45",
+              )}
+            >
               {REPORT_STATUS[status].shortLabel}
             </span>
           </li>
@@ -56,7 +61,10 @@ export function StatusTimeline({
         return (
           <li key={status} className="relative flex gap-3 pb-5 last:pb-0">
             {idx < REPORT_STATUS_ORDER.length - 1 && (
-              <span className="absolute top-6 left-[11px] h-[calc(100%-1.5rem)] w-px bg-black/10" aria-hidden />
+              <span
+                className="absolute top-6 left-[11px] h-[calc(100%-1.5rem)] w-px bg-black/10"
+                aria-hidden
+              />
             )}
             <span
               className={cn(
@@ -70,7 +78,11 @@ export function StatusTimeline({
               {idx + 1}
             </span>
             <div>
-              <p className={cn("text-sm", active || done ? "font-semibold text-ink" : "text-ink/50")}>{meta.label}</p>
+              <p
+                className={cn("text-sm", active || done ? "font-semibold text-ink" : "text-ink/50")}
+              >
+                {meta.label}
+              </p>
               <p className="text-xs text-ink/55">
                 {at ? format(new Date(at), "d MMM yyyy, HH:mm") : meta.description}
               </p>

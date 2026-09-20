@@ -41,7 +41,12 @@ export function StatusBadge({ status, className }: { status: ReportStatus; class
 
 export function PriorityBadge({ priority }: { priority: string | null }) {
   if (!priority) return <span className="text-xs text-muted-foreground">—</span>;
-  const tone = priority === "critical" || priority === "high" ? "alert" : priority === "medium" ? "signal" : "neutral";
+  const tone =
+    priority === "critical" || priority === "high"
+      ? "alert"
+      : priority === "medium"
+        ? "signal"
+        : "neutral";
   return (
     <span
       className={cn(

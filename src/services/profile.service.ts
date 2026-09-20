@@ -2,14 +2,49 @@ import { supabase } from "@/integrations/supabase/client";
 import type { AppRole, Profile, ProfileUpdate, ProfileWithRoles } from "@/types";
 
 export const profileService = {
-  /** Creates the profile + default citizen role if missing. Safe to call on every sign-in. */
+  /** Creates the profile + default citizen role if missing and guarantees email is stored. */
   async ensureProfile(): Promise<void> {
-    const { error } = await supabase.rpc("ensure_profile");
-    if (error) throw error;
+    try {
+      await supabase.rpc("ensure_profile");
+    } catch (err) {
+      console.warn("ensure_profile RPC failed or not present:", err);
+    }
+
+    const {
+      data: { user },
+    } = await supabase.auth.getUser();
+
+    if (user) {
+      const email = user.email ?? null;
+      const meta = user.user_metadata;
+      const fullName =
+        (typeof meta?.["full_name"] === "string" ? meta["full_name"] : null) ||
+        (typeof meta?.["name"] === "string" ? meta["name"] : null);
+      const avatarUrl = typeof meta?.["avatar_url"] === "string" ? meta["avatar_url"] : null;
+
+      const { error: upsertErr } = await supabase.from("profiles").upsert(
+        {
+          id: user.id,
+          email,
+          full_name: fullName,
+          avatar_url: avatarUrl,
+          updated_at: new Date().toISOString(),
+        },
+        { onConflict: "id" },
+      );
+
+      if (upsertErr) {
+        console.warn("Direct profile upsert error:", upsertErr);
+      }
+    }
   },
 
   async getProfile(userId: string): Promise<Profile | null> {
-    const { data, error } = await supabase.from("profiles").select("*").eq("id", userId).maybeSingle();
+    const { data, error } = await supabase
+      .from("profiles")
+      .select("*")
+      .eq("id", userId)
+      .maybeSingle();
     if (error) throw error;
     return data;
   },

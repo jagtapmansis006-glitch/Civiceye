@@ -10,14 +10,23 @@ export interface LocationValue {
   address: string;
 }
 
-export function LocationCapture({ value, onChange }: { value: LocationValue; onChange: (v: LocationValue) => void }) {
+export function LocationCapture({
+  value,
+  onChange,
+}: {
+  value: LocationValue;
+  onChange: (v: LocationValue) => void;
+}) {
   const geo = useGeolocation();
 
   function useDevice() {
     geo.capture();
   }
 
-  if (geo.position && (geo.position.latitude !== value.latitude || geo.position.longitude !== value.longitude)) {
+  if (
+    geo.position &&
+    (geo.position.latitude !== value.latitude || geo.position.longitude !== value.longitude)
+  ) {
     onChange({ ...value, latitude: geo.position.latitude, longitude: geo.position.longitude });
   }
 
@@ -44,7 +53,12 @@ export function LocationCapture({ value, onChange }: { value: LocationValue; onC
             step="any"
             inputMode="decimal"
             value={value.latitude ?? ""}
-            onChange={(e) => onChange({ ...value, latitude: e.target.value === "" ? null : Number(e.target.value) })}
+            onChange={(e) =>
+              onChange({
+                ...value,
+                latitude: e.target.value === "" ? null : Number(e.target.value),
+              })
+            }
           />
         </div>
         <div className="space-y-1.5">
@@ -55,7 +69,12 @@ export function LocationCapture({ value, onChange }: { value: LocationValue; onC
             step="any"
             inputMode="decimal"
             value={value.longitude ?? ""}
-            onChange={(e) => onChange({ ...value, longitude: e.target.value === "" ? null : Number(e.target.value) })}
+            onChange={(e) =>
+              onChange({
+                ...value,
+                longitude: e.target.value === "" ? null : Number(e.target.value),
+              })
+            }
           />
         </div>
         <div className="space-y-1.5">

@@ -3,9 +3,18 @@ import { ImagePlus, X } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { ACCEPTED_MEDIA_TYPES, MAX_MEDIA_FILES } from "@/services/media.service";
 
-export function MediaUpload({ files, onChange }: { files: File[]; onChange: (files: File[]) => void }) {
+export function MediaUpload({
+  files,
+  onChange,
+}: {
+  files: File[];
+  onChange: (files: File[]) => void;
+}) {
   const inputRef = useRef<HTMLInputElement>(null);
-  const previews = useMemo(() => files.map((f) => ({ file: f, url: URL.createObjectURL(f) })), [files]);
+  const previews = useMemo(
+    () => files.map((f) => ({ file: f, url: URL.createObjectURL(f) })),
+    [files],
+  );
 
   useEffect(() => {
     return () => previews.forEach((p) => URL.revokeObjectURL(p.url));
@@ -31,7 +40,10 @@ export function MediaUpload({ files, onChange }: { files: File[]; onChange: (fil
       />
       <div className="flex flex-wrap gap-3">
         {previews.map(({ file, url }, i) => (
-          <div key={url} className="relative size-24 overflow-hidden rounded-lg ring-1 ring-black/10">
+          <div
+            key={url}
+            className="relative size-24 overflow-hidden rounded-lg ring-1 ring-black/10"
+          >
             {file.type.startsWith("video/") ? (
               <video src={url} className="size-full object-cover" muted />
             ) : (
@@ -48,13 +60,20 @@ export function MediaUpload({ files, onChange }: { files: File[]; onChange: (fil
           </div>
         ))}
         {files.length < MAX_MEDIA_FILES && (
-          <Button type="button" variant="soft" className="h-24 w-24 flex-col gap-1 text-xs" onClick={() => inputRef.current?.click()}>
+          <Button
+            type="button"
+            variant="soft"
+            className="h-24 w-24 flex-col gap-1 text-xs"
+            onClick={() => inputRef.current?.click()}
+          >
             <ImagePlus className="size-5" />
             Add photo
           </Button>
         )}
       </div>
-      <p className="mt-2 text-xs text-ink/55">Up to {MAX_MEDIA_FILES} photos or short videos, 50 MB each.</p>
+      <p className="mt-2 text-xs text-ink/55">
+        Up to {MAX_MEDIA_FILES} photos or short videos, 50 MB each.
+      </p>
     </div>
   );
 }

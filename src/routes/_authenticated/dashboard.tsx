@@ -20,7 +20,9 @@ function CitizenDashboard() {
   const all = reports.data ?? [];
   const open = all.filter((r) => r.status !== "closed").length;
   const inProgress = all.filter((r) => ["assigned", "in_progress"].includes(r.status)).length;
-  const resolved = all.filter((r) => ["resolved", "citizen_verification", "closed"].includes(r.status)).length;
+  const resolved = all.filter((r) =>
+    ["resolved", "citizen_verification", "closed"].includes(r.status),
+  ).length;
   const awaitingYou = all.filter((r) => r.status === "citizen_verification");
 
   const firstName = profile?.full_name?.split(" ")[0] || user?.email?.split("@")[0] || "there";
@@ -48,12 +50,17 @@ function CitizenDashboard() {
       {awaitingYou.length > 0 && (
         <div className="rounded-xl bg-verd-soft p-4 ring-1 ring-verd/20">
           <p className="text-sm font-semibold text-verd">
-            {awaitingYou.length} report{awaitingYou.length > 1 ? "s" : ""} waiting for your confirmation
+            {awaitingYou.length} report{awaitingYou.length > 1 ? "s" : ""} waiting for your
+            confirmation
           </p>
           <ul className="mt-2 space-y-1 text-sm">
             {awaitingYou.map((r) => (
               <li key={r.id}>
-                <Link to="/reports/$id" params={{ id: r.id }} className="text-civic underline-offset-4 hover:underline">
+                <Link
+                  to="/reports/$id"
+                  params={{ id: r.id }}
+                  className="text-civic underline-offset-4 hover:underline"
+                >
                   {r.reference_code} · {r.title}
                 </Link>
               </li>

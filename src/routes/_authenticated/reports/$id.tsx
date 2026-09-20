@@ -43,7 +43,10 @@ function ReportDetailPage() {
 
   return (
     <div className="space-y-6">
-      <Link to="/reports" className="inline-flex items-center gap-1.5 text-sm font-medium text-civic hover:underline">
+      <Link
+        to="/reports"
+        className="inline-flex items-center gap-1.5 text-sm font-medium text-civic hover:underline"
+      >
         <ArrowLeft className="size-4" /> My reports
       </Link>
 
@@ -53,8 +56,12 @@ function ReportDetailPage() {
             <p className="eyebrow">
               {r.reference_code} · {categoryLabel(r.category)}
             </p>
-            <h1 className="mt-1 font-serif text-2xl font-semibold text-civic-deep md:text-3xl">{r.title}</h1>
-            <p className="mt-1 text-sm text-ink/55">Filed {format(new Date(r.created_at), "d MMM yyyy, HH:mm")}</p>
+            <h1 className="mt-1 font-serif text-2xl font-semibold text-civic-deep md:text-3xl">
+              {r.title}
+            </h1>
+            <p className="mt-1 text-sm text-ink/55">
+              Filed {format(new Date(r.created_at), "d MMM yyyy, HH:mm")}
+            </p>
           </div>
           <div className="flex items-center gap-2">
             <PriorityBadge priority={r.priority} />
@@ -110,7 +117,8 @@ function ReportDetailPage() {
               </pre>
             ) : (
               <p className="mt-2 text-sm text-ink/55">
-                Automated image and text analysis is not connected yet. Results will appear here once available.
+                Automated image and text analysis is not connected yet. Results will appear here
+                once available.
               </p>
             )}
           </section>

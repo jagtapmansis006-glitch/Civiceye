@@ -13,9 +13,15 @@ export const Route = createFileRoute("/login")({
   head: () => ({
     meta: [
       { title: "Log in — CivicEye" },
-      { name: "description", content: "Sign in to CivicEye to report civic issues and track their resolution." },
+      {
+        name: "description",
+        content: "Sign in to CivicEye to report civic issues and track their resolution.",
+      },
       { property: "og:title", content: "Log in — CivicEye" },
-      { property: "og:description", content: "Sign in to report civic issues and track their resolution." },
+      {
+        property: "og:description",
+        content: "Sign in to report civic issues and track their resolution.",
+      },
     ],
   }),
   component: LoginPage,
@@ -82,19 +88,40 @@ function LoginPage() {
       <form onSubmit={handleSubmit} className="space-y-4">
         <div className="space-y-1.5">
           <Label htmlFor="email">Email</Label>
-          <Input id="email" type="email" autoComplete="email" required value={email} onChange={(e) => setEmail(e.target.value)} />
+          <Input
+            id="email"
+            type="email"
+            autoComplete="email"
+            required
+            value={email}
+            onChange={(e) => setEmail(e.target.value)}
+          />
         </div>
         <div className="space-y-1.5">
           <div className="flex items-center justify-between">
             <Label htmlFor="password">Password</Label>
-            <button type="button" onClick={handleReset} className="text-xs font-medium text-civic hover:underline">
+            <button
+              type="button"
+              onClick={handleReset}
+              className="text-xs font-medium text-civic hover:underline"
+            >
               Forgot password?
             </button>
           </div>
-          <Input id="password" type="password" autoComplete="current-password" required value={password} onChange={(e) => setPassword(e.target.value)} />
+          <Input
+            id="password"
+            type="password"
+            autoComplete="current-password"
+            required
+            value={password}
+            onChange={(e) => setPassword(e.target.value)}
+          />
         </div>
         {error && (
-          <p className="rounded-lg bg-alert-soft px-3 py-2 text-sm text-alert ring-1 ring-alert/20" role="alert">
+          <p
+            className="rounded-lg bg-alert-soft px-3 py-2 text-sm text-alert ring-1 ring-alert/20"
+            role="alert"
+          >
             {error}
           </p>
         )}

@@ -6,15 +6,31 @@ import { lovable } from "@/integrations/lovable/index";
  */
 export const authService = {
   async signUpWithEmail(input: { email: string; password: string; fullName: string }) {
+    const redirectTo =
+      typeof window !== "undefined" ? `${window.location.origin}/auth/callback` : undefined;
+
     const { data, error } = await supabase.auth.signUp({
       email: input.email,
       password: input.password,
       options: {
+<<<<<<< Updated upstream
         emailRedirectTo: `${window.location.origin}/auth/callback`,
         data: { full_name: input.fullName },
+=======
+        emailRedirectTo: redirectTo,
+        data: {
+          full_name: input.fullName,
+          name: input.fullName,
+          email: input.email,
+        },
+>>>>>>> Stashed changes
       },
     });
-    if (error) throw error;
+
+    if (error) {
+      throw error;
+    }
+
     return data;
   },
 

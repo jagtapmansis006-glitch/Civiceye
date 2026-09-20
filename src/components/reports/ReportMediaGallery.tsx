@@ -4,7 +4,8 @@ export function ReportMediaGallery({ reportId }: { reportId: string }) {
   const media = useReportMedia(reportId);
   if (media.isPending) return <p className="text-sm text-ink/55">Loading attachments…</p>;
   if (media.isError) return <p className="text-sm text-alert">Attachments could not be loaded.</p>;
-  if (!media.data.length) return <p className="text-sm text-ink/55">No photos or videos were attached.</p>;
+  if (!media.data.length)
+    return <p className="text-sm text-ink/55">No photos or videos were attached.</p>;
 
   return (
     <div className="grid grid-cols-2 gap-3 sm:grid-cols-3">
@@ -20,10 +21,17 @@ export function ReportMediaGallery({ reportId }: { reportId: string }) {
             m.media_type === "video" ? (
               <video src={m.url} className="size-full object-cover" controls muted />
             ) : (
-              <img src={m.url} alt="Report attachment" className="size-full object-cover" loading="lazy" />
+              <img
+                src={m.url}
+                alt="Report attachment"
+                className="size-full object-cover"
+                loading="lazy"
+              />
             )
           ) : (
-            <span className="grid size-full place-items-center text-xs text-ink/50">Unavailable</span>
+            <span className="grid size-full place-items-center text-xs text-ink/50">
+              Unavailable
+            </span>
           )}
         </a>
       ))}

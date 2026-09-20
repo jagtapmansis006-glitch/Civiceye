@@ -53,8 +53,15 @@ function AdminDashboard() {
 
       <div className="grid grid-cols-2 gap-3 md:grid-cols-4">
         <StatCard label="Registered users" value={list.length} />
-        <StatCard label="Field workers" value={list.filter((u) => u.roles.includes("field_worker")).length} tone="signal" />
-        <StatCard label="Authorities" value={list.filter((u) => u.roles.includes("authority")).length} />
+        <StatCard
+          label="Field workers"
+          value={list.filter((u) => u.roles.includes("field_worker")).length}
+          tone="signal"
+        />
+        <StatCard
+          label="Authorities"
+          value={list.filter((u) => u.roles.includes("authority")).length}
+        />
         <StatCard label="Total reports" value={all.length} tone="verd" />
       </div>
 

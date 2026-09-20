@@ -13,7 +13,8 @@ const buttonVariants = cva(
         signal: "bg-signal text-civic-deep ring-1 ring-signal/40 hover:bg-signal/90",
         soft: "bg-glass text-primary ring-1 ring-primary/15 hover:bg-glass-strong font-medium",
         destructive: "bg-destructive text-destructive-foreground hover:bg-destructive/90",
-        outline: "border border-input bg-glass-strong hover:bg-accent hover:text-accent-foreground font-medium",
+        outline:
+          "border border-input bg-glass-strong hover:bg-accent hover:text-accent-foreground font-medium",
         secondary: "bg-secondary text-secondary-foreground hover:bg-secondary/80",
         ghost: "hover:bg-accent hover:text-accent-foreground font-medium",
         link: "text-primary underline-offset-4 hover:underline",

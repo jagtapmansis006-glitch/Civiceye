@@ -1,4 +1,4 @@
-# CivicEye 
+# CivicEye
 
 Build the initial CivicEye web application as a professional, modular civic issue reporting and resolution platform.
 

@@ -3,7 +3,8 @@ import type { ReportMedia } from "@/types";
 
 export const REPORT_MEDIA_BUCKET = "report-media";
 export const MAX_MEDIA_FILES = 4;
-export const ACCEPTED_MEDIA_TYPES = "image/jpeg,image/png,image/webp,video/mp4,video/quicktime,video/webm";
+export const ACCEPTED_MEDIA_TYPES =
+  "image/jpeg,image/png,image/webp,video/mp4,video/quicktime,video/webm";
 
 export interface ReportMediaWithUrl extends ReportMedia {
   url: string | null;

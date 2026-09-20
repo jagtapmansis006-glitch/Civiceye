@@ -48,7 +48,11 @@ function SettingsPage() {
 
   return (
     <div className="mx-auto max-w-2xl space-y-6">
-      <PageHeader eyebrow="Account" title="Profile & settings" description="How you appear on reports and how we can reach you." />
+      <PageHeader
+        eyebrow="Account"
+        title="Profile & settings"
+        description="How you appear on reports and how we can reach you."
+      />
 
       <form onSubmit={handleSubmit} className="glass-panel space-y-5 p-5 md:p-6">
         <div className="space-y-1.5">
@@ -81,7 +85,10 @@ function SettingsPage() {
         <p className="mt-1 text-sm text-ink/60">Roles are assigned by an administrator.</p>
         <div className="mt-3 flex flex-wrap gap-2">
           {(roles.length ? roles : (["citizen"] as const)).map((r) => (
-            <span key={r} className="rounded-full bg-civic/5 px-3 py-1 text-xs font-semibold text-civic ring-1 ring-civic/15">
+            <span
+              key={r}
+              className="rounded-full bg-civic/5 px-3 py-1 text-xs font-semibold text-civic ring-1 ring-civic/15"
+            >
               {ROLE_LABEL[r]}
             </span>
           ))}
