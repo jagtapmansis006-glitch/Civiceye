@@ -1,167 +1,170 @@
-# CivicEye
+🏛️ CivicEye
 
-Build the initial CivicEye web application as a professional, modular civic issue reporting and resolution platform.
+A professional, modular civic issue reporting and resolution platform empowering citizens, field workers, and municipal authorities.
 
-IMPORTANT:
+📌 Overview
 
-Do NOT create one giant file.
+CivicEye bridges the gap between citizens and local government authorities. It provides a seamless platform for reporting public infrastructure issues—such as potholes, garbage accumulation, broken streetlights, and drainage problems—while offering end-to-end tracking from submission to resolution.
 
-Use a clean component-based architecture.
+Designed with modularity and scalability at its core, CivicEye relies on Supabase for real-time data persistence, authentication, and storage, while laying the architectural foundation for multi-modal AI processing (Claude API + YOLOv11 Computer Vision).
 
-Keep pages, components, services, hooks, and utilities separated.
+✨ Key Features
 
-Do not create fake backend functionality.
+👥 Multi-Role Access Control
 
-Do not use hardcoded mock data for functionality that should come from Supabase.
+Citizen Portal: Report issues with geo-location and media attachments, track live report statuses, and verify completed work.
 
-Use Supabase as the backend.
+Field Worker View: Inspect assigned tasks, update on-site resolution statuses, and upload proof of work.
 
-The application must be designed so Claude AI and YOLO-based computer vision can be integrated later through secure server-side functions.
+Authority / Admin Dashboard: Manage regional issue queues, route tickets to field workers, analyze resolution metrics, and manage user roles.
 
-Never expose secret API keys in frontend code.
+📝 Citizen Report Lifecycle
 
-Keep the architecture easy to maintain and extend.
+[ Submitted ] ➔ [ AI Analysis ] ➔ [ Verified ] ➔ [ Assigned ]
+                                                       │
+[ Closed ] ◄── [ Citizen Verification ] ◄── [ Resolved ] ◄── [ In Progress ]
 
-PRODUCT:
-CivicEye allows citizens to report civic problems such as:
 
-potholes
+🎯 Core Infrastructure
 
-garbage accumulation
+Clean Service Layer: Decoupled backend operations (/src/services/supabase) ensure zero hardcoded mock data and keep UI components lean.
 
-broken streetlights
+Role-Based Auth: Secure authentication powered by Supabase Auth and Row Level Security (RLS).
 
-damaged roads
+Media Uploads: High-resolution image/video uploads integrated directly with Supabase Storage buckets.
 
-drainage problems
+Location Capture: Interactive mapping and GPS coordinate extraction for precise issue pinning.
 
-water leakage
+🛠️ Tech Stack
 
-public infrastructure damage
+Frontend: React, TypeScript, Vite, Tailwind CSS, Lucide Icons
 
-other civic issues
+Backend & Database: Supabase (PostgreSQL, PostGIS, Realtime, Storage)
 
-INITIAL USER ROLES:
+State & Data Fetching: TanStack Query / React Hooks
 
-Citizen
+Prepared AI Pipeline: Claude API (for natural language triage) & YOLOv11 (for automated image severity detection) via Supabase Edge Functions.
 
-Field Worker
+📁 Repository Architecture
 
-Authority/Admin
+CivicEye/
+├── public/                 # Static assets & public resources
+├── src/
+│   ├── assets/             # Brand logos, icons, and media
+│   ├── components/         # Reusable UI components (Buttons, Inputs, Cards, Modals)
+│   │   ├── common/         # Layouts, Navigation, Badges
+│   │   └── reports/        # Issue-specific components & status timeline
+│   ├── hooks/              # Custom React hooks (useAuth, useReports, useGeoLocation)
+│   ├── pages/              # Page views matching core routes
+│   │   ├── Landing.tsx
+│   │   ├── Login.tsx
+│   │   ├── Register.tsx
+│   │   ├── CitizenDashboard.tsx
+│   │   ├── CreateReport.tsx
+│   │   ├── MyReports.tsx
+│   │   ├── ReportDetails.tsx
+│   │   ├── FieldWorkerDashboard.tsx
+│   │   ├── AuthorityDashboard.tsx
+│   │   └── AdminDashboard.tsx
+│   ├── services/           # Supabase client & clean API abstraction layer
+│   │   └── supabase/
+│   │       ├── auth.ts
+│   │       ├── reports.ts
+│   │       └── storage.ts
+│   ├── types/              # TypeScript definitions & Supabase DB schemas
+│   └── utils/              # Helper functions (date formatting, geo-parsers)
+├── supabase/
+│   ├── functions/          # Edge Functions (Claude/YOLO stubs)
+│   └── migrations/         # SQL schema & RLS policies
+├── .env.example            # Environment variables placeholder schema
+├── package.json            # Project dependencies & build scripts
+└── vite.config.ts          # Vite configuration
 
-INITIAL PAGES:
 
-Landing page
+🚀 Getting Started
 
-Login
+Prerequisites
 
-Register
+Ensure you have the following installed on your machine:
 
-Citizen Dashboard
+Node.js (v18.x or higher)
 
-Create Report
+npm
 
-My Reports
+A Supabase project instance
 
-Report Details
+Local Installation
 
-Authority Dashboard
+Clone the repository:
 
-Field Worker Dashboard
+git clone https://github.com/jagtapmansis006-glitch/Civiceye.git
+cd Civiceye
 
-Admin Dashboard
 
-Profile/Settings
+Install dependencies:
 
-DESIGN:
+npm install
 
-Professional
 
-Modern
+Configure Environment Variables:
+Copy .env.example to create your local .env file:
 
-Simple
+cp .env.example .env
 
-Government/public-service appropriate
 
-Clean typography
+Open .env and fill in your Supabase project credentials:
 
-Accessible
+VITE_SUPABASE_URL=https://your-project-ref.supabase.co
+VITE_SUPABASE_PUBLISHABLE_KEY=your_supabase_publishable_key
 
-Responsive
 
-Desktop and mobile friendly
+Run the local development server:
 
-Avoid excessive gradients, animations, glassmorphism, or flashy effects
-
-Use a consistent design system
-
-Use reusable UI components
-
-CITIZEN REPORT FLOW:
-Citizen logs in
-→ opens Create Report
-→ selects issue category
-→ adds description
-→ uploads image/video if applicable
-→ captures location
-→ submits report
-→ receives report ID
-→ can track status
-
-REPORT STATUS:
-Submitted
-→ AI Analysis
-→ Verified
-→ Assigned
-→ In Progress
-→ Resolved
-→ Citizen Verification
-→ Closed
-
-IMPORTANT:
-For now, implement the UI and application structure cleanly, but do not pretend that AI analysis, computer vision, or authority workflows are functional unless they are actually connected to Supabase.
-
-Use Supabase Auth for authentication.
-
-Create a clear service layer for Supabase operations so backend interactions are not scattered throughout UI components.
-
-Prepare the project for:
-
-PostgreSQL
-
-PostGIS
-
-Supabase Storage
-
-Supabase Realtime
-
-Supabase Edge Functions
-
-Claude API
-
-YOLOv11 computer vision
-
-Do not create the Claude or YOLO integration yet.
-
-First establish a clean, working CivicEye frontend connected to Supabase.
-
-This project was built with [Lovable](https://lovable.dev).
-
-## Build with Lovable
-
-Continue developing this project in the [Lovable editor](https://lovable.dev/projects/d92c3c9d-6a26-49fb-af64-97f52ac0faaf).
-
-- **Ship faster**: describe what you want to build and Lovable handles the code.
-- **Stay in sync**: every change made in Lovable is committed straight to this repository.
-- **Full ownership**: this code is yours. Push to `main` on GitHub and your changes sync back into Lovable, ready for your next prompt.
-
-## Development
-
-Prefer working locally? You need Node.js and npm — [install with nvm](https://github.com/nvm-sh/nvm#installing-and-updating).
-
-```sh
-git clone <this-repository-url>
-cd <repository-name>
-npm i
 npm run dev
-```
+
+
+Navigate to http://localhost:5173 in your browser.
+
+🗄️ Database Setup (Supabase)
+
+To enable the backend functionality, run the provided migrations in your Supabase SQL Editor:
+
+Tables Required:
+
+profiles (links with auth.users, stores user role: citizen, field_worker, authority, admin)
+
+reports (stores title, description, category, latitude/longitude, status, user_id)
+
+report_media (stores image/video URLs linked to reports)
+
+assignments (tracks field worker assignments and resolution proof)
+
+Storage Buckets:
+
+Create a public bucket named report-media for upload attachments.
+
+🤖 Future Roadmap (AI Integration)
+
+The frontend architecture is explicitly structured to support secure, server-side AI integrations without client-side API key exposure:
+
+Claude API (via Supabase Edge Functions): Automated categorization, summary generation, and urgency detection from citizen descriptions.
+
+YOLOv11 Computer Vision: Automated visual verification of uploaded images to classify issue severity (e.g., measuring pothole depth/surface area).
+
+PostGIS Geospatial Queries: Automated proximity clustering to identify duplicated issue reports within a tight geographic radius.
+
+🤝 Contributing
+
+Fork the project repository.
+
+Create your Feature Branch (git checkout -b feature/AmazingFeature).
+
+Commit your changes (git commit -m 'feat: Add some AmazingFeature').
+
+Push to the Branch (git push origin feature/AmazingFeature).
+
+Open a Pull Request.
+
+📄 License
+
+Distributed under the MIT License. See LICENSE for more information.
